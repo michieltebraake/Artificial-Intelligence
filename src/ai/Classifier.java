@@ -76,16 +76,19 @@ public class Classifier {
             for (String line : lines) {
                 for (String word : tokenizer.tokenize(line)) {
                     int wordOccurences = 0;
-                    if (trainedM.containsKey(word)) {
-                        wordOccurences = trainedM.get(word);
-                    }
-                    scoreM += Math.log((wordOccurences + k) / (totalM + k * totalM));
+                    //Check if word is in vocabulary at all
+                    if (trainedM.containsKey(word) || trainedF.containsKey(word)) {
+                        if (trainedM.containsKey(word)) {
+                            wordOccurences = trainedM.get(word);
+                        }
+                        scoreM += Math.log((wordOccurences + k) / (totalM + k * totalM));
 
-                    wordOccurences = 0;
-                    if (trainedF.containsKey(word)) {
-                        wordOccurences = trainedF.get(word);
+                        wordOccurences = 0;
+                        if (trainedF.containsKey(word)) {
+                            wordOccurences = trainedF.get(word);
+                        }
+                        scoreF += Math.log((wordOccurences + k) / (totalF + k * totalF));
                     }
-                    scoreF += Math.log((wordOccurences + k) / (totalF + k * totalF));
                 }
             }
         } catch (IOException e) {
