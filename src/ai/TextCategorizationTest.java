@@ -1,12 +1,15 @@
-package src.ai.bb;
+package src.ai;
 
-import weka.core.*;
-import weka.core.converters.*;
-import weka.classifiers.trees.*;
-import weka.filters.*;
-import weka.filters.unsupervised.attribute.*;
+import weka.classifiers.trees.J48;
+import weka.core.Instances;
+import weka.core.converters.TextDirectoryLoader;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.StringToWordVector;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Example class that converts HTML files stored in a directory structure into 
